@@ -1,4 +1,9 @@
 #!/usr/bin/env bash
+#
+# projects-nexus
+# Import or update wireguard
+#
+
 user_agent="WireGuard-AndroidROMBuild/0.3 ($(uname -a))"
 wireguard_url="https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat"
 
