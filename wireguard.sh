@@ -3,6 +3,12 @@
 # projects-nexus
 # Import or update wireguard
 #
+# Install Required Packages
+if [[ ! "$(uname -o)" == "Android" ]]; then
+     sudo apt install git curl wget unzip -y
+else
+     pkg install git curl wget unzip -y
+fi
 
 user_agent="WireGuard-AndroidROMBuild/0.3 ($(uname -a))"
 wireguard_url="https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat"
