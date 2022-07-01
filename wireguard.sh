@@ -3,17 +3,9 @@
 # projects-nexus
 # Import or update wireguard
 #
-# Install Required Packages
-if [[ ! "$(uname -o)" == "Android" ]]; then
-     sudo apt install git curl wget unzip -y
-else
-     pkg install git curl wget unzip -y
-fi
 
 user_agent="WireGuard-AndroidROMBuild/0.3 ($(uname -a))"
 wireguard_url="https://git.zx2c4.com/wireguard-linux-compat/snapshot/wireguard-linux-compat"
-
-cd "$HOME" || exit 1
 
 while read -r distro package version _; do
         if [[ $distro == upstream && $package == linuxcompat ]]; then
@@ -27,20 +19,18 @@ if [ ! -f "wireguard-linux-compat-${ver}.zip" ]; then
     unzip wireguard-linux-compat-"${ver}".zip -d wireguard
 fi
 
-read -p "Provide kernel source folder name: " kdir
-if [ ! -d "${kdir}"/net/wireguard ]; then
-    mkdir "${kdir}"/net/wireguard
-    cp -r wireguard/*/src/* "${kdir}"/net/wireguard
-    cd "${kdir}" || exit 1
+if [ ! -d /net/wireguard ]; then
+    mkdir /net/wireguard
+    cp -r wireguard/*/src/* /net/wireguard
+    rm -rf wireguard*
     git add net/wireguard/*
     git commit -s -m "net: import wireguard-linux-compat ${ver}"
 else
-    rm -rf "${kdir}"/net/wireguard
-    cp -r wireguard/*/src/* "${kdir}"/net/wireguard
-    cd "${kdir}" || exit 1
+    rm -rf /net/wireguard
+    cp -r wireguard/*/src/* /net/wireguard
+    rm -rf wireguard*
     git add net/wireguard/*
     git commit -s -m "Merge tag 'v${ver}' of ${wireguard_url}"
 fi
 
-cd "$HOME" || exit 1 && rm -rf wireguard*
 echo "Done."

@@ -4,9 +4,6 @@
 # Import or update qcacld-3.0, qca-wifi-host-cmn, fw-api , audio-kernel and data-kernel
 #
 
-read -p "Provide kernel source folder name: " kdir
-cd "$HOME/${kdir}" || exit 1
-
 read -p "Please input the tag name: " tag
 
 read -p "Import qcacld-3.0, qca-wifi-host-cmn, fw-api? ( y or n ): "  ans
